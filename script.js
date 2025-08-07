@@ -3,6 +3,10 @@
 let valueDisplayed = "";
 
 let detectKeyPress = (key) => {
+  if (valueDisplayed == 0) {
+    valueDisplayed = "";
+  }
+
   valueDisplayed += key;
   console.log(valueDisplayed);
   displayValue(valueDisplayed);
@@ -22,3 +26,12 @@ let detectReset = () => {
   console.log("value is : ", valueDisplayed);
   displayValue(valueDisplayed);
 };
+
+document.addEventListener("keypress", (event) => {
+  let k = event.key;
+  if ((k >= 0 && k <= 9) || k == "-" || k == "+" || k == "/" || k == "*") {
+    detectKeyPress(k);
+  } else if (k == "Enter" || k == "=") {
+    detectCalculate();
+  }
+});
